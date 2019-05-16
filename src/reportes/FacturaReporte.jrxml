@@ -42,7 +42,7 @@ WHERE factura.codigo= $P!{cod}]]>
 				<textElement>
 					<font fontName="Arial" size="28" isStrikeThrough="false"/>
 				</textElement>
-				<text><![CDATA[ALL RETAILER GESTOR DE VENTAS]]></text>
+				<text><![CDATA[SISTEMA DE VENTAS]]></text>
 			</staticText>
 			<textField pattern="EEEEE dd MMMMM yyyy">
 				<reportElement x="458" y="19" width="100" height="20" uuid="3cc1d225-c593-430d-9a6f-de1240fb3ddc"/>
