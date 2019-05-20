@@ -1,10 +1,7 @@
 
 package modelo;
 
-/**
- *
- * @author LEIDY RODRIGUEZ
- */
+
 public class ProductoVenta {
     private String codigoProd;
     private String nombre;

@@ -14,7 +14,7 @@ import vista.FrmConexionBD;
 import vista.FrmIniciarSesion;
 /**
  * 
- * @author Yuliana Rodriguez, Juliana Perez, Leidy Rodriguez.
+ * @author Yuliana Rodriguez, Juliana Perez
  */
 public class CtrlConexionBD implements ActionListener {
 

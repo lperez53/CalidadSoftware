@@ -5,10 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author LEIDY RODRIGUEZ
- */
+
 public class FacturaDAO extends ConexionBD {
 
     public boolean createFact(Factura fact) {

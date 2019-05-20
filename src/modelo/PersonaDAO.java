@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Yuliana Rodriguez, Juliana Perez, Leidy Rodriguez
+ * @author Yuliana Rodriguez, Juliana Perez
  */
 public class PersonaDAO extends ConexionBD {
     

@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
  *
- * @author Yuliana Rodriguez, Juliana Rodriguez, Leidy Perez
+ * @author Yuliana Rodriguez, Juliana Rodriguez
  * 
  */
 public class ConexionBD {
