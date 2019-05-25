@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FacturaReporte" language="groovy" pageWidth="612" pageHeight="600" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="08babe09-ac55-4b4d-adcc-e6c3c01abf78">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="cod" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     productoventa.`nombreProd` AS productoventa_nombreProd,
+     productoventa.`precioUnidad` AS productoventa_precioUnidad,
+     productoventa.`cantidad` AS productoventa_cantidad,
+     factura.`totalPagar` AS factura_totalPagar,
+     factura.`codigo` AS factura_codigo
+FROM
+     `factura` factura INNER JOIN `itemfact` itemfact ON factura.`codigo` = itemfact.`codigoFact`
+     INNER JOIN `productoventa` productoventa ON itemfact.`codigoProd` = productoventa.`codigoProd`
+WHERE factura.codigo= $P!{cod}]]>
+	</queryString>
+	<field name="productoventa_nombreProd" class="java.lang.String"/>
+	<field name="productoventa_precioUnidad" class="java.lang.Float"/>
+	<field name="productoventa_cantidad" class="java.lang.Integer"/>
+	<field name="factura_totalPagar" class="java.lang.Float"/>
+	<field name="factura_codigo" class="java.lang.Integer"/>
+	<variable name="productoventa_precioUnidad_1" class="java.lang.Float" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{productoventa_precioUnidad}]]></variableExpression>
+	</variable>
+	<variable name="mult" class="java.lang.Float" resetType="Column">
+		<variableExpression><![CDATA[$F{productoventa_precioUnidad}*$F{productoventa_cantidad}]]></variableExpression>
+	</variable>
+	<variable name="sumar" class="java.lang.Float" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$V{mult}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="84" splitType="Stretch">
+			<staticText>
+				<reportElement x="91" y="7" width="367" height="43" uuid="ba94fc58-2b5d-4a41-bfe4-c4031c5cd9ee"/>
+				<textElement>
+					<font fontName="Arial" size="28" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[SISTEMA DE VENTAS]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="458" y="19" width="100" height="20" uuid="3cc1d225-c593-430d-9a6f-de1240fb3ddc"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="212" y="64" width="140" height="20" uuid="04f8bca0-9c55-483f-a9f3-f418dcabf385"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[FACTURA DE VENTA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="222" y="0" width="48" height="20" uuid="baab20b6-cd4e-4c62-aa10-1f592b735497"/>
+				<textElement>
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<text><![CDATA[NIT:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="286" y="0" width="121" height="20" uuid="7e6b599b-0c98-4175-9a07-a13eae4b2a61"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{factura_codigo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement x="42" y="0" width="100" height="20" uuid="4d804b8f-0b18-497b-910f-4ce1d61de660"/>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Nombre del producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="0" width="100" height="20" uuid="fe166296-efa2-409a-a586-26aeabd25bab"/>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="307" y="0" width="100" height="20" uuid="8c3e0457-af07-4dd3-a115-001b474f3ca5"/>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Precio por unidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="0" width="100" height="20" uuid="8742f7f7-d5bc-413d-92df-450be285f5f0"/>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="42" y="0" width="100" height="20" uuid="1e3c21e1-b128-4de7-ab65-c97c105fdfee"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productoventa_nombreProd}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="0" width="100" height="20" uuid="f3dd5370-5a79-4148-918a-5bce7deb0fe5"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productoventa_cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="307" y="0" width="100" height="20" uuid="46decdd6-fd35-4dd1-a288-3d6d329fec0d"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productoventa_precioUnidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="426" y="0" width="100" height="20" uuid="4595a853-dabd-4208-bef4-47a183649de0"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{mult}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="32" y="0" width="100" height="20" uuid="2948e3bd-8ecd-4ee9-ae12-4f958cf0344d"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[valor total sin IVA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="160" y="0" width="100" height="20" uuid="079b4dc8-fc27-4de9-86f4-7d9871b2eded"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumar}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="307" y="0" width="100" height="20" uuid="dc0e5e00-270d-466d-aeae-65f8ea24adc0"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[total con IVA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="426" y="0" width="100" height="20" uuid="54f2aef2-bb72-4b39-9249-66faadf18fbc"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{factura_totalPagar}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="187" y="2" width="80" height="20" uuid="44c47c99-b7d6-4d23-a333-d651607c4afa"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="267" y="2" width="40" height="20" uuid="d635dcb4-e8cf-4bbb-a995-178f133e4667"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="4" splitType="Stretch"/>
+	</summary>
+</jasperReport>
